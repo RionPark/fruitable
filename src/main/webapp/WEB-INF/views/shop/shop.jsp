@@ -52,11 +52,11 @@
                             <div class="col-xl-3">
                                 <div class="bg-light ps-3 py-3 rounded d-flex justify-content-between mb-4">
                                     <label for="fruits">Default Sorting:</label>
-                                    <select id="fruits" name="fruitlist" class="border-0 form-select-sm bg-light me-3" form="fruitform">
-                                        <option value="volvo">Nothing</option>
-                                        <option value="saab">Popularity</option>
-                                        <option value="opel">Organic</option>
-                                        <option value="audi">Fantastic</option>
+                                    <select id="orderType" class="border-0 form-select-sm bg-light me-3" form="fruitform" onchange="selectOrderType(this)">
+                                        <option value="">선택</option>
+                                        <option value="1">평점순</option>
+                                        <option value="FOI_PRICE DESC">가격높은순</option>
+                                        <option value="FOI_PRICE ASC">가격낮은순</option>
                                     </select>
                                 </div>
                             </div>
@@ -104,8 +104,10 @@
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <h4 class="mb-2">Price</h4>
-                                            <input type="range" class="form-range w-100" id="rangeInput" name="rangeInput" min="0" max="500" value="0" oninput="amount.value=rangeInput.value">
-                                            <output id="amount" name="amount" min-velue="0" max-value="500" for="rangeInput">0</output>
+                                            <input type="range" class="form-range w-100" id="rangeInput" 
+                                            name="rangeInput" min="0" max="30000" value="0" oninput="amount.value=rangeInput.value" 
+                                            onchange="changePrice(this)">
+                                            <output id="amount" name="amount" min-velue="0" max-value="30000" for="rangeInput">0</output>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -207,7 +209,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-9">
-                                <div class="row g-4 justify-content-center">
+                                <div class="row g-4 justify-content-center" id="fruite-list">
                                     <div class="col-md-6 col-lg-6 col-xl-4">
                                         <div class="rounded position-relative fruite-item">
                                             <div class="fruite-img">
@@ -373,6 +375,102 @@
         </div>
         <!-- Fruits Shop End-->
 
+<script>
+var foiPrice = 0;
+var caiNum = 0;
+var orderType = '';
+function selectOrderType(orderTypeObj){
+	orderType = orderTypeObj.value;
+	getFruites();
+}
+function changePrice(priceObj){
+	foiPrice = priceObj.value;
+	getFruites();
+}
+function selectCategory(caiNum){
+	this.caiNum = caiNum;
+	getFruites();
+}
+function getCategories(){
+	/*
+      <ul class="list-unstyled fruite-categorie">
+         <li>
+             <div class="d-flex justify-content-between fruite-name">
+                 <a href="#"><i class="fas fa-apple-alt me-2"></i>Apples</a>
+                 <span>(3)</span>
+             </div>
+         </li>
+	*/
+	const xhr = new XMLHttpRequest();
+	xhr.open('GET','/categories')
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState === 4){
+			if(xhr.status === 200){
+				const categories = JSON.parse(xhr.responseText);
+				var html = '';
+				for(const category of categories){
+					html += '<li>';
+					html += '<div class="d-flex justify-content-between fruite-name">';
+					html += '<a href="javascript:selectCategory(' + category.caiNum + ')"><i class="fas fa-apple-alt me-2"></i>' + category.caiName + '</a>' 
+					html += '<span>(' + category.count + ')</span>' 
+					html += '</div>';
+					html += '</li>';
+				}
+				document.querySelector('ul.fruite-categorie').innerHTML = html;
+			}
+		}
+	}
+	xhr.send();
+}
+function getFruites(){
+	let url = '/foods?';
+	if(caiNum){
+		url += 'caiNum=' + caiNum + '&';
+	}
+	if(foiPrice){
+		url += 'foiPrice=' + foiPrice + '&';
+	}
+	if(orderType){
+		url += 'orderType=' + orderType + '&';
+	}
+	const xhr = new XMLHttpRequest();
+	xhr.open('GET',url);
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState === xhr.DONE){
+			if(xhr.status === 200){
+				const foods = JSON.parse(xhr.responseText);
 
+				var html = '';
+				for(const food of foods){
+					html += '<div class="col-md-6 col-lg-6 col-xl-4">';
+					html += '<div class="rounded position-relative fruite-item">';
+					html += '<div class="fruite-img">';
+					html += '<img src="' + food.foiImgPath + '" class="img-fluid w-100 rounded-top" alt="">';
+					html += '</div>';
+					html += '<div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">' + food.caiName + '</div>';
+					html += '<div class="p-4 border border-secondary border-top-0 rounded-bottom">';
+					html += '<h4>' + food.foiName + '</h4>';
+					if(food.foiSummary.length>160){
+						food.foiSummary = food.foiSummary.substring(0, 160);
+					}
+					html += '<p>' + food.foiSummary + '</p>';
+					html += '<div class="d-flex justify-content-between flex-lg-wrap">';
+					html += '<p class="text-dark fs-5 fw-bold mb-0">' + food.foiPrice +'원</p>';
+					html += '<a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>';
+					html += '</div>';
+					html += '</div>';
+					html += '</div>';
+					html += '</div>';
+				}
+				document.querySelector('#fruite-list').innerHTML = html;
+			}
+		}	
+	}
+	xhr.send();
+	
+}
+window.addEventListener('load', getCategories);
+window.addEventListener('load', getFruites.bind(null,null));
+</script>
 
 <%@ include file="/WEB-INF/views/common/bottom.jsp"%>

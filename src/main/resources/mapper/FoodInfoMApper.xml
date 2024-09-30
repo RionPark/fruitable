@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.fruitable.mapper.FoodInfoMapper">
+	<select id="selectFoods" resultType="com.shop.fruitable.vo.FoodInfoVO">
+		SELECT 
+			FOI.FOI_NUM, FOI_NAME, FOI_PRICE, FOI_IMG_PATH, 
+			FOI_SUMMARY, FOI_DESC, FOI.CREDAT, FOI.CRETIM, 
+			FOI.CAI_NUM , CAI.CAI_NAME, ROUND(AVG(FRI.FRI_RATE)) FRI_RATE
+		FROM food_info FOI
+		INNER JOIN category_info CAI
+		ON FOI.CAI_NUM = CAI.CAI_NUM
+		LEFT OUTER JOIN food_rate_info FRI
+		ON FRI.FOI_NUM=FOI.FOI_NUM
+		<where>
+			<if test='caiNum != null and caiNum != 0'>
+				AND FOI.CAI_NUM = #{caiNum}
+			</if>
+			<if test='foiPrice !=null and foiPrice !=0'>
+				AND FOI.FOI_PRICE &lt;= #{foiPrice}
+			</if>
+		</where>
+		GROUP BY FOI.FOI_NUM
+		<trim prefix="ORDER BY">
+			<if test='orderType !=null and orderType != ""'>
+			${orderType}
+			</if>
+		</trim>
+	</select>
+	<select id="selectFood" resultType="com.shop.fruitable.vo.FoodInfoVO">
+		SELECT 
+			FOI.FOI_NUM, FOI_NAME, FOI_PRICE, FOI_IMG_PATH, 
+			FOI_SUMMARY, FOI_DESC, FOI.CREDAT, FOI.CRETIM, 
+			FOI.CAI_NUM , CAI.CAI_NAME, ROUND(AVG(FRI.FRI_RATE)) FRI_RATE
+		FROM food_info FOI
+		INNER JOIN category_info CAI
+		ON FOI.CAI_NUM = CAI.CAI_NUM
+		LEFT OUTER food_rate_info FRI
+		ON FRI.FOI_NUM=FOI.FOI_NUM
+		WHERE FOI_NUM = #{foiNum}
+		GROUP BY FOI.FOI_NUM
+	</select>
+	<insert id="insertFood" parameterType="com.shop.fruitable.vo.FoodInfoVO">
+	  INSERT INTO FOOD_INFO (FOI_NAME, FOI_PRICE, FOI_IMG_PATH, FOI_SUMMARY, FOI_DESC, CAI_NUM)
+      VALUES (#{foiName}, #{foiPrice}, #{foiImgPath}, #{foiSummary}, #{foiDesc}, #{caiNum})
+	</insert>
+	 <update id="updateFood" parameterType="com.shop.fruitable.vo.FoodInfoVO">
+        UPDATE FOOD_INFO
+        SET FOI_NAME = #{foiName}, FOI_PRICE = #{foiPrice}, FOI_IMG_PATH = #{foiImgPath},
+            FOI_SUMMARY = #{foiSummary}, FOI_DESC = #{foiDesc}, CAI_NUM = #{caiNum}
+        WHERE FOI_NUM = #{foiNum}
+    </update>
+    
+    <delete id="deleteFood" parameterType="int">
+        DELETE FROM FOOD_INFO WHERE FOI_NUM = #{foiNum}
+    </delete>
+</mapper>

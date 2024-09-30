@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shop.fruitable.mapper.CategoryInfoMapper">
+
+	<select id="selectCategories" resultType="com.shop.fruitable.vo.CategoryInfoVO">
+		SELECT CAI_NUM, CAI_NAME, CAI_DESC, CREDAT, CRETIM,
+		(SELECT COUNT(*) FROM food_info FOI WHERE FOI.CAI_NUM = CAI.CAI_NUM) COUNT
+		FROM category_info CAI
+	</select>
+	<select id="selectCategory" resultType="com.shop.fruitable.vo.CategoryInfoVO">
+		SELECT CAI_NUM, CAI_NAME, CAI_DESC, CREDAT, CRETIM 
+		FROM category_info
+		WHERE CAI_NUM=#{caiNum}
+	</select>
+	<insert id="insertCategory">
+		INSERT INTO category_info (CAI_NAME, CAI_DESC) 
+		VALUES (#{caiName},#{caiDesc})
+	</insert>
+	<update id="updateCategory">
+		UPDATE category_info 
+		SET CAI_NAME=#{caiName}, 
+		CAI_DESC=#{caiDesc}
+		WHERE  CAI_NUM=#{caiNum}
+	</update>
+	<delete id="deleteCategory">
+		DELETE FROM category_info WHERE  CAI_NUM=#{caiNum}
+	</delete>
+</mapper>
