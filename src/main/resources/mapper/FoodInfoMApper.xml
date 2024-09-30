@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shop.fruitable.mapper.FoodInfoMapper">
+	<select id="selectFoodCount" resultType="int">
+		SELECT 
+			count(1)
+		FROM food_info FOI
+		INNER JOIN category_info CAI
+		ON FOI.CAI_NUM = CAI.CAI_NUM
+		LEFT OUTER JOIN food_rate_info FRI
+		ON FRI.FOI_NUM=FOI.FOI_NUM
+		<where>
+			<if test='caiNum != null and caiNum != 0'>
+				AND FOI.CAI_NUM = #{caiNum}
+			</if>
+			<if test='foiPrice !=null and foiPrice !=0'>
+				AND FOI.FOI_PRICE &lt;= #{foiPrice}
+			</if>
+		</where>
+	</select>		
 	<select id="selectFoods" resultType="com.shop.fruitable.vo.FoodInfoVO">
 		SELECT 
 			FOI.FOI_NUM, FOI_NAME, FOI_PRICE, FOI_IMG_PATH, 
@@ -25,6 +42,7 @@
 			${orderType}
 			</if>
 		</trim>
+		limit #{start},#{count}
 	</select>
 	<select id="selectFood" resultType="com.shop.fruitable.vo.FoodInfoVO">
 		SELECT 

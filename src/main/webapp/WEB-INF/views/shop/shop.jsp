@@ -55,8 +55,8 @@
                                     <select id="orderType" class="border-0 form-select-sm bg-light me-3" form="fruitform" onchange="selectOrderType(this)">
                                         <option value="">선택</option>
                                         <option value="1">평점순</option>
-                                        <option value="FOI_PRICE DESC">가격높은순</option>
-                                        <option value="FOI_PRICE ASC">가격낮은순</option>
+                                        <option value="2">가격높은순</option>
+                                        <option value="3">가격낮은순</option>
                                     </select>
                                 </div>
                             </div>
@@ -354,18 +354,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12">
-                                        <div class="pagination d-flex justify-content-center mt-5">
-                                            <a href="#" class="rounded">&laquo;</a>
-                                            <a href="#" class="active rounded">1</a>
-                                            <a href="#" class="rounded">2</a>
-                                            <a href="#" class="rounded">3</a>
-                                            <a href="#" class="rounded">4</a>
-                                            <a href="#" class="rounded">5</a>
-                                            <a href="#" class="rounded">6</a>
-                                            <a href="#" class="rounded">&raquo;</a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -438,7 +426,9 @@ function getFruites(){
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState === xhr.DONE){
 			if(xhr.status === 200){
-				const foods = JSON.parse(xhr.responseText);
+				const result = JSON.parse(xhr.responseText);
+				console.log(result);
+				const foods = result.list;
 
 				var html = '';
 				for(const food of foods){
@@ -462,6 +452,18 @@ function getFruites(){
 					html += '</div>';
 					html += '</div>';
 				}
+				html += '<div class="col-12">';
+				html += '<div class="pagination d-flex justify-content-center mt-5">';
+				html += '<a href="#" class="rounded">&laquo;</a>';
+				html += '<a href="#" class="active rounded">1</a>';
+				html += '<a href="#" class="rounded">2</a>';
+				html += '<a href="#" class="rounded">3</a>';
+				html += '<a href="#" class="rounded">4</a>';
+				html += '<a href="#" class="rounded">5</a>';
+				html += '<a href="#" class="rounded">6</a>';
+				html += '<a href="#" class="rounded">&raquo;</a>';
+				html += '</div>';
+				html += '</div>';
 				document.querySelector('#fruite-list').innerHTML = html;
 			}
 		}	

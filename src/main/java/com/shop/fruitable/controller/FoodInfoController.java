@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shop.fruitable.service.FoodInfoService;
 import com.shop.fruitable.vo.FoodInfoVO;
+import com.shop.fruitable.vo.ResultList;
 
 @RestController
 public class FoodInfoController {
@@ -16,7 +17,7 @@ public class FoodInfoController {
 	private FoodInfoService foiService;
 	
 	@GetMapping("/foods")
-	public List<FoodInfoVO> getFoods(FoodInfoVO food){
+	public ResultList<FoodInfoVO> getFoods(FoodInfoVO food){
 		return foiService.selectFoods(food);
 	}
 }

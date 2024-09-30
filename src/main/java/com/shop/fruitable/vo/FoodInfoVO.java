@@ -20,4 +20,6 @@ public class FoodInfoVO {
 	private String caiName;
 	private String orderType;
 	private int friRate;
+	private int start;
+	private int count;
 }
