@@ -432,7 +432,7 @@ function getFruites(){
 
 				var html = '';
 				for(const food of foods){
-					html += '<div class="col-md-6 col-lg-6 col-xl-4">';
+					html += '<div class="col-md-6 col-lg-6 col-xl-4" style="cursor:pointer" onclick="goPage(\'/views/shopdetail/shopdetail?foiNum=' + food.foiNum +'\')">';
 					html += '<div class="rounded position-relative fruite-item">';
 					html += '<div class="fruite-img">';
 					html += '<img src="' + food.foiImgPath + '" class="img-fluid w-100 rounded-top" alt="">';

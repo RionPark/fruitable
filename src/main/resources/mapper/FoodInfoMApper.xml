@@ -52,9 +52,9 @@
 		FROM food_info FOI
 		INNER JOIN category_info CAI
 		ON FOI.CAI_NUM = CAI.CAI_NUM
-		LEFT OUTER food_rate_info FRI
+		LEFT OUTER JOIN food_rate_info FRI
 		ON FRI.FOI_NUM=FOI.FOI_NUM
-		WHERE FOI_NUM = #{foiNum}
+		WHERE FOI.FOI_NUM = #{foiNum}
 		GROUP BY FOI.FOI_NUM
 	</select>
 	<insert id="insertFood" parameterType="com.shop.fruitable.vo.FoodInfoVO">

@@ -29,6 +29,7 @@
 
         <!-- Template Stylesheet -->
         <link href="/res/css/style.css" rel="stylesheet">
+        <script src="/js/common.js"></script>
 		<script>
 			window.addEventListener('load',function(){
 				const links = document.querySelectorAll('a[data-menu]');

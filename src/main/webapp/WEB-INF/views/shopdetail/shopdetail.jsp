@@ -44,23 +44,23 @@
                             <div class="col-lg-6">
                                 <div class="border rounded">
                                     <a href="#">
-                                        <img src="/res/img/single-item.jpg" class="img-fluid rounded" alt="Image">
+                                        <img src="/res/img/single-item.jpg" class="img-fluid rounded" alt="Image" id="foiImgPath">
                                     </a>
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <h4 class="fw-bold mb-3">Brocoli</h4>
-                                <p class="mb-3">Category: Vegetables</p>
-                                <h5 class="fw-bold mb-3">3,35 $</h5>
-                                <div class="d-flex mb-4">
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
-                                    <i class="fa fa-star text-secondary"></i>
+                                <h4 class="fw-bold mb-3" id="foiName">Brocoli</h4>
+                                <p class="mb-3">Category: <span id="caiName">Vegetables</span></p>
+                                <h5 class="fw-bold mb-3"><span id="foiPrice">3,35 </span>원</h5>
+                                <div class="d-flex mb-4" id="friRate" data-format="makeStar">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <p class="mb-4">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.</p>
-                                <p class="mb-4">Susp endisse ultricies nisi vel quam suscipit. Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish</p>
+                                <p class="mb-4" id="foiSummary">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.</p>
+                                
                                 <div class="input-group quantity mb-5" style="width: 100px;">
                                     <div class="input-group-btn">
                                         <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
@@ -84,81 +84,16 @@
                                             aria-controls="nav-about" aria-selected="true">Description</button>
                                         <button class="nav-link border-white border-bottom-0" type="button" role="tab"
                                             id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
-                                            aria-controls="nav-mission" aria-selected="false">Reviews</button>
+                                            aria-controls="nav-mission" aria-selected="false" onclick="getFoodRates(this)">Reviews</button>
                                     </div>
                                 </nav>
                                 <div class="tab-content mb-5">
                                     <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                                        <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc. 
+                                        <p id="foiDesc">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc. 
                                             Susp endisse ultricies nisi vel quam suscipit </p>
-                                        <p>Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish filefish Antarctic 
-                                            icefish goldeye aholehole trumpetfish pilot fish airbreathing catfish, electric ray sweeper.</p>
-                                        <div class="px-2">
-                                            <div class="row g-4">
-                                                <div class="col-6">
-                                                    <div class="row bg-light align-items-center text-center justify-content-center py-2">
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Weight</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="mb-0">1 kg</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row text-center align-items-center justify-content-center py-2">
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Country of Origin</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Agro Farm</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row bg-light text-center align-items-center justify-content-center py-2">
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Quality</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Organic</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row text-center align-items-center justify-content-center py-2">
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Сheck</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Healthy</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row bg-light text-center align-items-center justify-content-center py-2">
-                                                        <div class="col-6">
-                                                            <p class="mb-0">Min Weight</p>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <p class="mb-0">250 Kg</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
-                                        <div class="d-flex">
-                                            <img src="/res/img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
-                                            <div class="">
-                                                <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                                <div class="d-flex justify-content-between">
-                                                    <h5>Jason Smith</h5>
-                                                    <div class="d-flex mb-3">
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star text-secondary"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </div>
-                                                <p>The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic 
-                                                    words etc. Susp endisse ultricies nisi vel quam suscipit </p>
-                                            </div>
-                                        </div>
+                                        
                                         <div class="d-flex">
                                             <img src="/res/img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
                                             <div class="">
@@ -191,24 +126,20 @@
                                 <div class="row g-4">
                                     <div class="col-lg-6">
                                         <div class="border-bottom rounded">
-                                            <input type="text" class="form-control border-0 me-4" placeholder="Yur Name *">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="border-bottom rounded">
-                                            <input type="email" class="form-control border-0" placeholder="Your Email *">
+                                            <input type="text" class="form-control border-0 me-4" placeholder="Yur Name *" id="friName">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="border-bottom rounded my-4">
-                                            <textarea name="" id="" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>
+                                            <textarea name="" id="friComment" class="form-control border-0" cols="30" rows="8" placeholder="Your Review *" spellcheck="false"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="d-flex justify-content-between py-3 mb-5">
                                             <div class="d-flex align-items-center">
                                                 <p class="mb-0 me-3">Please rate:</p>
-                                                <div class="d-flex align-items-center" style="font-size: 12px;">
+                                                <input type="hidden" id="friRate">
+                                                <div class="d-flex align-items-center" style="font-size: 12px;" onclick="paintStart(event)">
                                                     <i class="fa fa-star text-muted"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
@@ -216,7 +147,7 @@
                                                     <i class="fa fa-star"></i>
                                                 </div>
                                             </div>
-                                            <a href="#" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</a>
+                                            <a href="javascript:addFoodRate()" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</a>
                                         </div>
                                     </div>
                                 </div>
@@ -518,5 +449,120 @@
         </div>
         <!-- Single Product End -->
  
+<script>
+const foiNum = '${param.foiNum}';
 
+function addFoodRate(){
+	const param = {
+			friName : document.querySelector('#friName').value,
+			friComment : document.querySelector('#friComment').value,
+			friRate : document.querySelector('#friRate').value,
+			foiNum : foiNum
+	}
+	const conf = {
+			method:'POST',
+			url:'/food-rates',
+			json:true,
+			callback : function(res){
+				if(res==='1'){
+					alert('리뷰등록 완료');
+				}
+			},
+			param : JSON.stringify(param)
+	}
+	ajax(conf);
+}
+function paintStart(evt){
+	const targetObj = evt.target;
+	const obj = targetObj.parentElement;
+	const is = obj.querySelectorAll('i.fa.fa-star');
+	for(let idx = 0; idx < is.length;idx++){
+		const i = is[idx];
+		if(i===targetObj){
+			makeStar(obj,idx+1);
+			document.querySelector('#friRate').value = idx + 1;
+			return;
+		}
+	}
+}
+function makeStar(obj,cnt){
+	var html = '';
+	for(var i=1;i<=5;i++){
+		html += '<i class="fa fa-star ';
+		if(i<=cnt){
+			html += 'text-secondary';
+		}
+		html += '"></i>';
+	}
+	obj.innerHTML = html;
+}
+function getFood(){
+	const param = {
+			url : '/foods/' + foiNum,
+			callback : function(res){
+				const food = JSON.parse(res);
+				console.log(food);
+				for(const key in food){
+					if(food[key]){
+						const obj = document.querySelector('#' + key);
+						if(obj){
+							if(obj.tagName === 'IMG'){
+								obj.src = food[key];
+							}else if(obj.getAttribute('data-format')){
+								const funcName = obj.getAttribute('data-format');
+								window[funcName](obj,food[key]);
+							}else{
+								obj.innerHTML = food[key];
+							}
+						}
+					}
+				}
+			}
+	}
+	ajax(param);
+}
+/*
+ * <div class="d-flex">
+
+ */
+function getFoodRates(obj){
+	const param = {
+			url : '/food-rates?foiNum=' + foiNum,
+			callback : function(res){
+				console.log(res);
+				
+				const foodRates = JSON.parse(res);
+				let html = '';
+				for(const foodRate of foodRates){
+					html += '<div class="d-flex">';
+					html += ' <img src="/res/img/avatar.jpg" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">';
+					html += ' <div class="">';
+					html += ' <p class="mb-2" style="font-size: 14px;">' + foodRate.credat + '</p>';
+					html += ' <div class="d-flex justify-content-between">';
+					html += ' <h5>' + foodRate.friName + '</h5>';
+					html += ' <div class="d-flex mb-3" id="star' + foodRate.friNum + '">';
+
+					for(var i=1;i<=5;i++){
+						html += '<i class="fa fa-star ';
+						if(i<=foodRate.friRate){
+							html += 'text-secondary';
+						}
+						html += '"></i>';
+					}
+					html += ' </div>';
+					html += ' </div>';
+					html += ' <p>' + foodRate.friComment + '</p>';
+					html += ' </div>';
+					html += ' </div>';
+				}
+				document.querySelector('#nav-mission').innerHTML = html;
+				
+			}
+	}
+	ajax(param);
+}
+window.onload = getFood;
+</script>
 <%@ include file="/WEB-INF/views/common/bottom.jsp"%>
+
+
