@@ -18,4 +18,13 @@
 		WHERE USI_ID=#{usiId}
 		AND  USI_PWD=#{usiPwd}
 	</select>
+	<update id="updateUser">
+		UPDATE user_info
+		SET USI_NAME=#{usiName},
+		<if test='usiImgPath != null and usiImgPath != ""'>
+		USI_IMG_PATH=#{usiImgPath},
+		</if>
+		USI_DESC=#{usiDesc}
+		WHERE USI_NUM=#{usiNum}
+	</update>
 </mapper>
