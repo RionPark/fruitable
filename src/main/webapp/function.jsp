@@ -8,9 +8,7 @@
 </head>
 <body>
 <script>
-let num = '12a';
-num = parseInt(num);
-alert(num);
+
 </script>
 </body>
 </html>

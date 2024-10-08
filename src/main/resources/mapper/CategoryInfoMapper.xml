@@ -6,6 +6,11 @@
 		SELECT CAI_NUM, CAI_NAME, CAI_DESC, CREDAT, CRETIM,
 		(SELECT COUNT(*) FROM food_info FOI WHERE FOI.CAI_NUM = CAI.CAI_NUM) COUNT
 		FROM category_info CAI
+		<where>
+			<if test='caiName != null and caiName != ""'>
+				AND CAI_NAME LIKE CONCAT('%',#{caiName},'%') 
+			</if>
+		</where>
 	</select>
 	<select id="selectCategory" resultType="com.shop.fruitable.vo.CategoryInfoVO">
 		SELECT CAI_NUM, CAI_NAME, CAI_DESC, CREDAT, CRETIM 

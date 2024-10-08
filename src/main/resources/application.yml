@@ -9,7 +9,7 @@ spring:
       prefix: /WEB-INF/
       suffix: .jsp
   datasource:
-    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    driver-class-name: net.sf.log4jdbc.DriverSpy
     url: jdbc:log4jdbc:mariadb://localhost:3307/fruitable
     username: root
     password: r1r2r3
@@ -18,11 +18,10 @@ spring:
       minimum-idle: 2
       maximum-pool-size: 4
 
+
 logging:
-  level:
-    '[com.shop.fruitable.mapper]': TRACE
+  config: classpath:log4j.xml
 mybatis:
   mapper-locations: mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
