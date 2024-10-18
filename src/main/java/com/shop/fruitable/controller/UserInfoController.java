@@ -39,7 +39,7 @@ public class UserInfoController {
 	}
 	
 	@PutMapping("/users")
-	public int updateUser(UserInfoVO user, HttpSession session) {
-		return usiService.updateUser(session, user);
+	public int updateUser(UserInfoVO user) {
+		return usiService.updateUser(user);
 	}
 }

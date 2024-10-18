@@ -1,5 +1,7 @@
 package com.shop.fruitable.aop;
 
+import java.lang.reflect.Method;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -7,7 +9,10 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+
+import com.shop.fruitable.vo.CategoryInfoVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,7 +25,16 @@ public class LogAOP {
 	//서비스의 모든 메서드에 대한 로그를 찍는데 리턴타입이 int인것만 로그를 찍어주세요
 	@Before("allController()")
 	public void before(JoinPoint jp) {
-		log.info("before execute controller");
+		MethodSignature ms = (MethodSignature)jp.getSignature();
+		Method method = ms.getMethod();
+		String methodName = method.getName();
+		log.info("before execute controller [{}]", methodName);
+		Object[] args = jp.getArgs();
+		for(Object arg : args) {
+			if(arg instanceof CategoryInfoVO) {
+				log.info("arg=>{}", arg);
+			}
+		}
 	}
 
 	@After("allController()")

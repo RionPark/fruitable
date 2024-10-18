@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shop.fruitable.mapper.UserInfoMapper;
+import com.shop.fruitable.util.HttpSessionUtil;
 import com.shop.fruitable.vo.UserInfoVO;
 
 @Service
@@ -27,7 +28,8 @@ public class UserInfoService {
 	public int insertUser(UserInfoVO user){
 		return usiMapper.insertUser(user);
 	}
-	public int updateUser(HttpSession session, UserInfoVO user){
+	public int updateUser(UserInfoVO user){
+		HttpSession session = HttpSessionUtil.getSession();
 		UserInfoVO loginUser = (UserInfoVO)session.getAttribute("user");
 		user.setUsiNum(loginUser.getUsiNum());
 		if(usiMapper.updateUser(user)==1) {
